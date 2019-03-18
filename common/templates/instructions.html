@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Instructions{% endblock pagename %}
+
+
+{% block content %}
+<header class="near-black tc pv3 avenir">
+  <h1 class="mt2 mb0 baskerville i fw1 f1">Instructions</h1>
+  <p class="center bb b--white-50 w-50 mt4"></p>
+</header>
+<div class='center w-50-ns w-100'>
+  <p class='near-black'>
+    DjangoGoat is an intentionally vulnerable Django application with a test
+    suite which includes automated pentests using the ZAP security testing tool.
+  </p>
+  <p class='near-black'>It's aim is to demonstrate:</p>
+  <ul>
+    <li class='pv1'>
+      How to find and fix common web application security vulnerabilities, and
+    </li>
+    <li class='pv1'>
+      How to integrate automated pentesting into a BDD test suite.
+    </li>
+  </ul>
+  <p class='near-black'>
+    The DjangoGoat repo has two branches: <i>master</i> and
+    <i>broken</i>.
+  </p>
+  <p class='near-black'>
+    The <i>master</i> branch contains the app and tests, with no
+    vulnerabilities deliberately introduced (although there are a few
+    weaknesses like a lack of rate-limiting on the login page, and a lack of
+    monitoring, the fixing of which we decided was outside the scope of this
+    simple demonstration app).
+  </p>
+  <p class='near-black'>
+    The <i>broken</i> branch contains the app and tests, and contains a
+    number of additional commits, each of which introduces a different security
+    vulnerability.
+  </p>
+  <h2>
+    Notes
+  </h2>
+  <ul>
+    <li class='pv1'>
+      When switching between branches or commits, please note you may need
+      to rerun migrations.
+    </li>
+    <li class='pv1'>
+      Very occasionally the BDD tests will not run. We think this is caused by
+      a timing issue. Just Ctrl + C, and try again.
+    </li>
+    <li class='pv1'>
+      As you progress through the 'borken' commits, some BDD tests will fail.
+      This is expected behavior.
+    </li>
+  </ul>
+  <h2>
+    Exercise 1: Run the test suite
+  </h2>
+  <p class='near-black'>
+    On the <i>broken</i> branch, run the BDD test suite using the
+    instructions in the README.
+  </p>
+  <p class='near-black'>
+    Once the tests have completed, read over the report which ZAP generated.
+    It'll be called 'report.html', and be in the same directory from which you
+    start the tests.
+  </p>
+  <p class='near-black'>
+    If you're interested to see what ZAP finds on the <i>broken</i> branch
+    that it doesn't find on the <i>master</i> branch, run the tests on the
+    <i>master</i> branch as well.
+  </p>
+  <h2>
+    Exercise 2: Code review for vulnerabilities
+  </h2>
+  <p class='near-black'>
+    Do a <i>checkout</i> of the <i>broken</i> branch.
+  </p>
+  <p class='near-black'>
+    Read the diff of each commit after it diverges from the <i>master</i>
+    branch to understand how each vulnerability is created.
+  </p>
+  <h2>
+    Exercise 3: Exploit vulnerabilities manually
+  </h2>
+  <p class='near-black'>
+    On the <i>broken</i> branch, try these attacks:
+  </p>
+  <ol>
+  <li class='pv1'>
+    Log in without a password using SQL injection
+    <ul>
+      <li class='pv1'>Enter a username for a valid user, in the username field.</li>
+      <li class='pv1'>Enter the string "' OR '1'='1" in the password field.</li>
+    </ul>
+  </li>
+  <li class='pv1'>
+    Perform a cross-site scripting attack from one user on another user
+    <ul>
+      <li class='pv1'>On the write-note or conversation page, select a user to write to.</li>
+      <li class='pv1'>
+        In the content section of the note, include the following script:
+        <p>"&lt;script&gt;alert(‘XSS Attack’)&lt;/script&gt;"</p>
+      </li>
+    </ul>
+  </li>
+  <li class='pv1'>
+    Use URL enumeration to access a page the user you're logged in as
+    shouldn't see
+    <ul>
+      <li class='pv1'>Browse to a note between you and another user.</li>
+      <li class='pv1'>
+        Change the pk in the url to another note number (choosing a low number
+        is a good idea).
+      </li>
+      <li class='pv1'>
+        Repeat until you see a note from another user (on the `broken` branch).
+      </li>
+    </ul>
+  </li>
+  <li class='pv1'>
+    Find a stacktrace by visiting a non-existant URL
+  </li>
+  <li class='pv1'>
+    Use ZAP to attack the login form using credential stuffing
+    (optional task)
+    <ul>
+      <li class='pv1'><a href='https://groups.google.com/forum/#!topic/zaproxy-users/P3hFcY_eXUk'>
+        This link explains how.
+      </a></li>
+    </ul>
+  </li>
+  </ol>
+  <h2>
+    Exercise 4: Code review for ZAP integration
+  </h2>
+  <p class='near-black'>
+    On either branch, read and understand the diff for the commit called
+    "Add ZAP security scanning".
+  </p>
+  <p class='near-black'>
+    This commit represents all the code you need to add automated pentesting
+    into a project which has an existing BDD test suite based on Behave and
+    Selenium.
+  </p>
+  <h2>
+    Exercise 5: Manual pentesting with ZAP
+  </h2>
+  <p class='near-black'>
+    On the <i>broken</i> branch, run ZAP manually to spider the app and
+    then run an active scan against any URLs which look interesting. You could
+    even experiment with using ZAP's fuzzer.
+  </p>
+  <p class='near-black'>
+    There's no particular aim for this exercise. It's just about experimenting
+    with ZAP to understand its capabilities.
+  </p>
+</div>
+{% endblock content %}

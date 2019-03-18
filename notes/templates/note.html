@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Note Details{% endblock pagename %}
+
+
+{% block content %}
+<div class="flex flex-wrap mh3 mt4">
+  <div class='w-50-l w-100 center ph4-ns ph2'>
+    <article class="dt dt--fixed w-100 bb b--black-05 pb2 mt2">
+      <div class="dtc w2 w3-ns v-mid">
+        <a href="{% url 'profile' pk=note.sender.pk %}" class='link dim'>
+          {% if note.sender.userprofile.avatar %}
+            <img src="{% get_media_prefix %}{{ note.sender.userprofile.avatar }}"
+            class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"/>
+          {% else %}
+            <img src="/static/unknown_goat.png"
+            class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"
+            title="Black shillouette of a goat with a pink question mark">
+          {% endif %}
+        </a>
+      </div>
+      <div class="dtc v-mid pl3">
+        <p class="f6 fw4 black mv1">
+          From
+          <b>
+            {% if note.sender == user %}
+              You
+            {% else %}
+              {{ note.sender }}
+            {% endif %}
+          </b>
+          &nbsp;To
+          <b>
+          {% if note.receiver == user %}
+            You
+          {% else %}
+            {{ note.receiver }}
+          {% endif %}
+          </b>
+        </p>
+        <small  class="f7 mt0 mb2 black-60">
+          On {{ note.created|date:'d M Y' }} at
+          {{ note.created|date:'g:i a' }} you said:
+        </small>
+        <p class="f6 fw4 pv2 mv0 black-80 word-normal">"{{ note.content }}"</p>
+    </article>
+    <div class='tc mv2'>
+      {% if note.receiver == user %}
+      <a class="f7 link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+         href="{% url 'conversation' friend_pk=note.sender.pk %}">Back</a>
+      {% else %}
+      <a class="f7 link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+         href="{% url 'conversation' friend_pk=note.receiver.pk %}">Back</a>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock content %}

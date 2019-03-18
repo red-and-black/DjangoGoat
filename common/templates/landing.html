@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Landing{% endblock pagename %}
+
+
+{% block content %}
+<!-- NAVBAR
+===================================== -->
+<header class="near-black tc pv3 avenir">
+  <h1 class="mt2 mb0 baskerville i fw1 f1">DjangoGoat</h1>
+  <h2 class="mt2 mb0 f6 fw4 ttu tracked">Is not a real app</h2>
+  <p class="center bb b--black-70 w-50 mt4"></p>
+</header>
+<div class='center w-50-ns w-100'>
+  <p class='near-black'>
+    DjangoGoat is an intentionally vulnerable django app, to help django
+    developers learn how to pentest and secure their apps. If you are seeing
+    it online, please don't put any real data in it.
+  </p>
+  <p class='near-black'>
+    This is a voluntary, not-for-profit effort and we welcome help! If you
+    would like to contribute code, content or documentation to this project,
+    send us a pull request at
+    <a href="https://github.com/red-and-black/DjangoGoat"
+      class='link dim black-70'>GitHub</a>
+  </p>
+  <p class='near-black'>
+    This app uses Django 2.1.7, and is very simple. There are other vulnerable
+    testing apps for earlier versions of django, or more complicated apps and
+    vunerabilities, run by other teams. See
+    <a href="https://github.com/Contrast-Security-OSS/DjanGoat"
+      class='link dim black-70'>DjanGoat</a> and
+    <a href="https://github.com/nVisium/django.nV"
+      class='link dim black-70'>django.nV</a>.
+  </p>
+</div>
+{% endblock content %}

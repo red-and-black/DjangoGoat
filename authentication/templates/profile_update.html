@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load setclass %}
+
+{% block pagename %}Profile Update{% endblock pagename %}
+
+{% block content %}
+<form enctype='multipart/form-data' method='post'
+  class="pa4 black-80 measure center">
+  <fieldset id="profile" class="ba b--transparent ph0 mh0">
+    <legend class="f4 fw6 ph0 mh0">Profile update</legend>
+  {% csrf_token %}
+  <div class='mt3 w-100'>
+    <label for='id_avatar' class="db fw6 lh-copy f6">Avatar</label>
+      {{ form.avatar | setclass:'w-100 mb2'}}
+      {% for error in field.errors %}
+        <small id="name-desc" class="f6 black-60 db mv2">
+          {{ error }}
+        </small>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='mt3'>
+    <label for='id_bio' class="db fw6 lh-copy f6">Bio</label>
+      {{ form.bio | setclass:'db border-box w-100 measure ba b--white-40 pa2 mb2'}}
+      {% for error in field.errors %}
+        <small id="name-desc" class="f6 black-60 db mv2">
+          {{ error }}
+        </small>
+      {% endfor %}
+  </div>
+  <div class="">
+    <input class="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+      id='update' type="submit" value="Update">
+  </div>
+</form>
+{% endblock content %}

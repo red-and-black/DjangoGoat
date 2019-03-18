@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load setclass %}
+
+{% block pagename %}Conversation{% endblock pagename %}
+
+
+{% block content %}
+<div class="flex flex-wrap mh3 mt2">
+  {% if conversation %}
+  <div class='w-50-l w-100 center ph4-ns ph2'>
+    <form method='post' class="black-80 measure center">
+      <fieldset class="ba b--transparent ph0 mh0">
+      {% csrf_token %}
+      <div class='mt2'>
+        {{ form.content | setclass:'w-100 ba b--white-40 pa2 mb2' }}
+      </div>
+      <div class="">
+        <input class="b mt2 ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+            id='reply_button' type="submit" value="Reply to {{ friend_name }}">
+      </div>
+    </form>
+    <div class='w-75-m w-100 center ph4-ns ph2 mt4'>
+      {% for note in conversation %}
+        {% if request.user == note.sender %}
+        <article class="dt dt--fixed w-100 bb b--black-05 pb2 mt2">
+          <div class="dtc w2 w3-ns v-mid">
+            <a href="{% url 'profile' pk=note.sender.pk %}" class='link dim'>
+            {% if note.sender.userprofile.avatar %}
+              <img src="{% get_media_prefix %}{{ note.sender.userprofile.avatar }}"
+              class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"/>
+            {% else %}
+              <img src="/static/unknown_goat.png"
+              class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"
+              title="Black shillouette of a goat with a pink question mark">
+            {% endif %}
+            </a>
+          </div>
+          <div class="dtc v-mid pl3"
+          style='word-wrap: break-word !important;'>
+            <a class="link dim" href="{% url 'note' pk=note.pk %}">
+              <small class="f7 mt0 mb2 black-60">
+                On {{ note.created|date:'d M Y' }} at
+                {{ note.created|date:'g:i a' }} <b>you</b> said:
+              </small>
+              <p class="f6 fw4 pv2 mv0 black-80">"{{ note.content }}"</p>
+            </a>
+          </div>
+        </article>
+        {% else %}
+        <article class="dt dt--fixed w-100 bb b--black-05 pb2 mt2">
+            <div class="dtc v-mid pr3 fr">
+              <a class="link dim" href="{% url 'note' pk=note.pk %}">
+                <small class="f7 mt0 mb2 black-60">
+                  On {{ note.created|date:'d M Y' }} at
+                  {{ note.created|date:'g:i a' }}
+                  <b>{{ friend_name }}</b> said:
+                </small>
+                <p class="f6 fw4 pv2 mv0 black-80">"{{ note.content }}"</p>
+              </a>
+            </div>
+          <div class="dtc w2 w3-ns v-mid">
+            <a href="{% url 'profile' pk=note.sender.pk %}" class='link dim'>
+            {% if note.sender.userprofile.avatar %}
+              <img src="{% get_media_prefix %}{{ note.sender.userprofile.avatar }}"
+              class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"/>
+            {% else %}
+              <img src="/static/unknown_goat.png"
+              class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"
+              title="Black shillouette of a goat with a pink question mark">
+            {% endif %}
+            </a>
+          </div>
+        </article>
+        {% endif %}
+      {% endfor %}
+      {% else %}
+      <div class="v-mid pl3 tc">
+        <h3 class="f6 f5-ns fw6 lh-title black mt3 mb5 tc">
+          No notes between you and {{ friend_name }} so far.
+        </h3>
+      </div>
+      <div class='tc mv2'>
+        <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-yellow dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+           href="{% url 'write-note' %}">Start a conversation</a>
+      </div>
+      {% endif %}
+      <div class='tc mv2'>
+        <a class="f7 link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+           href="{% url 'dash' %}">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

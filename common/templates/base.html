@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <link rel="stylesheet" href="{% static '/css/tachyons-4.11.1.min.css' %}"/>
+    <title>DjangoGoat | {% block pagename %}{% endblock pagename %}</title>
+
+  </head>
+
+  <body class="bg-light-pink near-black">
+
+<!-- NAVBAR
+===================================== -->
+<nav class="flex justify-between bb b--white-10">
+  <div class="flex-grow pa3 flex items-center">
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-lightest-blue dib pa3 ph4-l"
+    href="{% url 'landing' %}">Home</a>
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l"
+    href="https://github.com/red-and-black/djangogoat" target='_blank'>Code</a>
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-yellow dib pa3 ph4-l"
+    href="/vulnerabilities">Vulnerabilities</a>
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-near-white dib pa3 ph4-l"
+    href="/instructions">Instructions</a>
+    {% if user.is_authenticated %}
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-washed-red dib pa3 ph4-l"
+    href="/dash">Dash</a>
+    {% endif %}
+  </div>
+  <div class="flex-grow pa3 flex items-center">
+    {% if user.is_authenticated %}
+      <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-blue dib pa3 ph4-l" href="{% url 'logout' %}">
+        <i class='fa fa-lg fa-user'></i>
+          &nbsp;{{ user.username }} | Log Out
+      </a>
+    {% else %}
+      <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-blue dib pa3 ph4-l"
+        href="{% url 'login' %}">Log In</a>
+      <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-yellow dib pa3 ph4-l"
+        href="{% url 'sign-up' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</nav>
+
+
+
+<!-- CONTENT
+===================================== -->
+    {% block content %}
+    {% endblock content %}
+  </body>
+</html>

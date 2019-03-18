@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Log In{% endblock pagename %}
+
+
+{% block content %}
+<form method='post' class="pa4 black-80 measure center">
+  <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+    <legend class="f4 fw6 ph0 mh0">Log In</legend>
+    <small id="error" class="f6 black-60 db mv2">
+      {{ error }}
+    </small>
+  {% csrf_token %}
+  <div class='mt3'>
+    <label for='id_username' class="db fw6 lh-copy f6">Username</label>
+    <input type='text' id='id_username' name='username'
+      class="b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2"
+      required autofocus>
+  </div>
+  <div class='mt3'>
+    <label for='id_password' class="db fw6 lh-copy f6">Password</label>
+    <input type='password' id='id_password' name='password'
+      class="b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2"
+      autocomplete='off' required>
+  </div>
+  <div class="">
+    <button class="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+      id="login_button" type="submit">
+      Log in
+    </button>
+  </div>
+</form>
+{% endblock content %}

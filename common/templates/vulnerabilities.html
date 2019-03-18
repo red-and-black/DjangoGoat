@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Vulnerabilities{% endblock pagename %}
+
+
+{% block content %}
+<header class="near-black tc pv3 avenir">
+  <h1 class="mt2 mb0 baskerville i fw1 f1">Vulnerabilities</h1>
+  <p class="center bb b--white-50 w-50 mt4"></p>
+  <p class="center w-50 mt4">
+    Even in the 'good' version of our app we have a couple of vulnerabilities.
+    ZAP will not pick these up, but they are there - a good example of why you
+    need to know a little about common issues, and not rely only on automated
+    tools.
+  </p>
+  <p class="center w-50 mt4">
+    In addition to these vulnerbailities, this version of the app will show some
+    ZAP alerts if you scan it.
+  </p>
+  <p class="center w-50 mt4">
+    These are 'Cookie No HttpOnly Flag' and 'Cookie without Secure Flag'.
+    They relate to the 'sessionid' cookie on the log out page. They occur because
+    when Django logs a user out, the sessionid cookie is replaced with an empty
+    string, and has no flags set. This isn't a security problem (see the explanation
+    <a href='https://stackoverflow.com/a/33787443' class='link dim'>here</a>).
+  </p>
+  <p class="center w-50 mt4">
+    You may also come across alerts for SQL injection. We've tried our best to
+    exploit this, but it seems to us it is a false positive. If you can figure
+    it out, let us know!
+  </p>
+</header>
+<div class='center w-50-ns w-100'>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A2 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Vulnerable authentication</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Log in page
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure mv0">
+        The app has no rate limiting on the log in page and doesn't use
+        multi-factor authentication.
+        Rate limiting and multi-factor aren't built in to Django, and we did
+        not build one ourselves due to time constraints. In a real app these
+        should be addressed.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure mv0">
+        This app is open to brute force and credential stuffing authentication
+        attacks. A malicious user or bot could try to guess a legitmate user's
+        password as many times as they need to until they succeed.
+      </p>
+      <p class="f6 lh-copy measure mv0">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication"
+          class='link dim'>
+          A2-Broken Authentication
+        </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A10 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Insufficient logging and monitoring</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Admin
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure mv0">
+        This app has no logging and monitoring.
+        Attackers rely on insufficient logging and monitoring to have time to
+        conduct other attacks before the owner notices.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure mv0">
+        For example, in this app there is also no rate limiting on the log in page.
+        Because there is insufficient logging and monitoring, the app owner would
+        not notice a brute force attack unless they happened to be watching at that
+        exact moment.
+      </p>
+      <p class="f6 lh-copy measure mv0">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A10-Insufficient_Logging%26Monitoring"
+          class='link dim'>
+          A10-Insufficient Logging and Montioring
+        </a>
+      </p>
+    </div>
+  </article>
+</div>
+{% endblock content %}

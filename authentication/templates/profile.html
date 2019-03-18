@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block pagename %}Profile {% endblock pagename %}
+
+
+{% block content %}
+<article class="w-third-l w-50-m w-100 center br3 pa3 pa4-ns mv3 ba b--white-30">
+  <div class="tc">
+    {% if target_user.userprofile.avatar %}
+    <img src="{% get_media_prefix %}{{ target_user.userprofile.avatar }}"
+        class="br-100 h4 w4 dib" title="picture of a goat">
+    {% else %}
+    <img src="/static/unknown_goat.png" class="br-100 h4 w4 dib"
+      title="Black shillouette of a goat with a pink question mark">
+    {% endif %}
+    <h1 class="f4">{{ target_user.username }}</h1>
+    <hr class="mw3 bb bw1 b--white-40">
+  <p class="lh-copy measure center f6 black-70">
+    {{ target_user.userprofile.bio }}
+  </p>
+  {% if target_user == request.user %}
+    <a class="center tc mt2 f7 link bg-animate white hover-near-black hover-bg-lightest-blue dib pv2 ph3 br-pill ba b--white-20"
+       href="{% url 'profile-update' %}">Edit Profile</a>
+  {% endif %}
+</div>
+</article>
+{% endblock content %}

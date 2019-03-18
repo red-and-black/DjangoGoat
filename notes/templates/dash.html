@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagename %}Dash{% endblock pagename %}
+
+
+{% block content %}
+<div class="flex flex-wrap mh3 mt4">
+{% if latest_notes %}
+  <div class='w-100'>
+    <div class='w-50-l w-75-m w-100 center ph4-ns ph2'>
+    <div class='tc center mb3'>
+      <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-yellow dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+      href="{% url 'write-note' %}">Start new conversation</a>
+      <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+      href="{% url 'profile-update' %}">Edit Profile</a>
+    </div>
+    {% for note in latest_notes %}
+    <article class="dt dt--fixed  w-100 bb b--black-05 pb2 mt2">
+      <div class="dtc w2 w3-ns v-mid">
+        <a href="{% url 'profile' pk=note.sender.pk %}" class='link dim'>
+          {% if note.sender.userprofile.avatar %}
+            <img src="{% get_media_prefix %}{{ note.sender.userprofile.avatar }}"
+            class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"/>
+          {% else %}
+            <img src="/static/unknown_goat.png"
+            class="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns mb2"
+            title="Black shillouette of a goat with a pink question mark">
+          {% endif %}
+        </a>
+      </div>
+      <div class="v-mid pl3">
+        {% if note.receiver == user %}
+        <a class="link dim"
+           href="{% url 'conversation' friend_pk=note.sender.pk %}">
+        {% else %}
+        <a class="link dim"
+           href="{% url 'conversation' friend_pk=note.receiver.pk %}">
+        {% endif %}
+        <p class="note-details f6 fw4 black mv1">
+          Between you and
+            {% if note.sender == user %}
+              {{ note.receiver }}
+            {% else %}
+              {{ note.sender }}
+            {% endif %}
+        </p>
+        <small class="f7 mt0 mb2 black-60">
+          On {{ note.created|date:'d M Y' }} at
+          {{ note.created|date:'g:i a' }}
+          <b>
+          {% if note.sender == user %}
+            you
+          {% else %}
+            {{ note.sender }}
+          {% endif %}
+          </b>
+          said:
+        </small>
+        <p class="f6 fw4 pv2 mv0 black-80 word-normal">"{{ note.content }}"</p>
+        </a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% else %}
+  <div class='tc center mb3'>
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-yellow dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+    href="{% url 'write-note' %}">Start new conversation</a>
+    <a class="f6 f5-l link bg-animate white hover-near-black hover-bg-light-green dib pa3 ph4-l pv2 ph4 br-pill ba b--white-20"
+    href="{% url 'profile-update' %}">Edit Profile</a>
+  </div>
+{% endif %}
+</div>
+{% endblock content %}
