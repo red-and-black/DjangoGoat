@@ -1,0 +1,5 @@
+# files
+*.pyc
+*.sqlite3
+
+# directories
