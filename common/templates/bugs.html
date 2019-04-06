@@ -41,18 +41,18 @@
         Sign up, settings.py
       </p>
       <h3 class='f6'>Details</h3>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         There are no controls on the length, complexity, similarity or
         commonness of the password a user chooses.
       </p>
       <h3 class='f6'>Possible exploitation</h3>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         This means a user could choose a weak or common password, making it
         much easier for an attacker to guess. A manual attack will quickly
         crack a password like 'password', but even with random or more obscure
         passwords, if they are short enough a script can crack them.
       </p>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         <b>OWASP Top 10 reference:</b>
         <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication"
           class='link dim'>
@@ -60,7 +60,7 @@
         </a>
       </p>
     </div>
-  </article>  
+  </article>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A2 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Vulnerable authentication</h2>
@@ -70,7 +70,7 @@
         Log in page
       </p>
       <h3 class='f6'>Details</h3>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         The app has no rate limiting on the log in page and doesn't use
         multi-factor authentication.
         Rate limiting and multi-factor aren't built in to Django, and we did
@@ -83,12 +83,74 @@
         attacks. A malicious user or bot could try to guess a legitmate user's
         password as many times as they need to until they succeed.
       </p>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         <b>OWASP Top 10 reference:</b>
         <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication"
           class='link dim'>
           A2-Broken Authentication
         </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A7 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Cross site scripting</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Conversation page
+        Dash page
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure">
+        We have included two versions of this vulnerability.
+      </p>
+      <p class="f6 lh-copy measure">
+        On the dash, the message content is using the Django built-in
+        'safe' filter.
+      </p>
+      <p class="f6 lh-copy measure">
+        On the conversation page, we wrapped the message content in the
+        'autoescape off' tag.
+      </p>
+      <p class="f6 lh-copy measure">
+        We also changed the SESSION_COOKIE_HTTPONLY to False.
+        Changing this removed an extra layer of protection against cross site
+        scripting, by allowing an attacker to access the cookie more easily
+        using JavaScript.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure">
+        A malicious user could send a message to another user, containing a
+        script in the message body. Because we didn't escape the HTML when
+        displaying the user input, the scripts will run in the victim's browser.
+      </p>
+      <p class="f6 lh-copy measure">
+        An attacker could use this to gain access to a user's cookies (so they
+        can hijack the user's session), show them a link to a malicious url,
+        or just annoy them with pop ups.
+      </p>
+      <p class="f6 lh-copy measure">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A7-Cross-Site_Scripting_(XSS)"
+          class='link dim'>
+          A7-Cross-Site Scripting (XSS)
+        </a>
+      </p>
+      <p class="f6 lh-copy measure">
+        <b>Django docs:</b>
+        <p>
+          <a href="https://docs.djangoproject.com/en/2.1/ref/settings/#session-cookie-httponly"
+            class='link dim'>
+            SESSION_COOKIE_HTTPONLY
+          </a>
+        </p>
+        <p>
+          <a href="https://docs.djangoproject.com/en/2.1/topics/security/#cross-site-scripting-xss-protection"
+            class='link dim'>
+            Cross site scripting protection
+          </a>
+        </p>
       </p>
     </div>
   </article>
@@ -101,19 +163,19 @@
         Admin
       </p>
       <h3 class='f6'>Details</h3>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         This app has no logging and monitoring.
         Attackers rely on insufficient logging and monitoring to have time to
         conduct other attacks before the owner notices.
       </p>
       <h3 class='f6'>Possible exploitation</h3>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         For example, in this app there is also no rate limiting on the log in
         page. Because there is insufficient logging and monitoring, the app
         owner would not notice a brute force attack unless they happened to be
         watching at that exact moment.
       </p>
-      <p class="f6 lh-copy measure mv0">
+      <p class="f6 lh-copy measure">
         <b>OWASP Top 10 reference:</b>
         <a href="https://www.owasp.org/index.php/Top_10-2017_A10-Insufficient_Logging%26Monitoring"
           class='link dim'>

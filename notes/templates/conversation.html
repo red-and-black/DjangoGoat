@@ -43,7 +43,9 @@
                 On {{ note.created|date:'d M Y' }} at
                 {{ note.created|date:'g:i a' }} <b>you</b> said:
               </small>
+              {% autoescape off %}
               <p class="f6 fw4 pv2 mv0 black-80">"{{ note.content }}"</p>
+              {% endautoescape %}
             </a>
           </div>
         </article>
