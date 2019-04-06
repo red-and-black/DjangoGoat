@@ -93,6 +93,42 @@
     </div>
   </article>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A6 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Security Misconfiguration</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        settings.py
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure mv0">
+        We've made several minor changes to the settings.py file, all of which
+        actually mirror Django's defaults. We've removed CSRF_COOKIE_HTTPONLY,
+        CSRF_COOKIE_SECURE, SECURE_BROWSER_XSS_FILTER,
+        SECURE_CONTENT_TYPE_NOSNIFF, and SESSION_COOKIE_SECURE from the
+        settings.py file, effectively setting them to False.
+      </p>
+      <p class="f6 lh-copy measure mv0">
+        We've also changed DEBUG to be True, which leaks data about our code.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure mv0">
+        On their own, each of these changes might not make a lot of difference.
+        But they added extra layers of protection against attacks such as
+        cross-site scripting and cross site request forgery, making it a little
+        harder for an attacker to imitate a real user, or exfiltrate data once
+        they accessed it.
+      </p>
+      <p class="f6 lh-copy measure mv0">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A6-Security_Misconfiguration"
+          class='link dim'>
+          A6-Security Misconfiguration
+        </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A7 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Cross site scripting</h2>
     <div class="pa3 bt b--white">

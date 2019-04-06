@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load setclass_rm_autocomplete %}
 {% load setclass %}
 {% block pagename %}Sign Up{% endblock pagename %}
 
@@ -20,7 +19,7 @@
   </div>
   <div class='mt3'>
     <label for='id_password1' class="db fw6 lh-copy f6">Password</label>
-      {{ form.password1|setclass_rm_autocomplete:'b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2' }}
+      {{ form.password1|setclass:'b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2' }}
       {% for error in form.password1.errors %}
         <small id="error" class="f6 black-60 db mv2">
           {{ error }}
@@ -29,7 +28,7 @@
   </div>
   <div class='mt3'>
     <label for='id_password2' class="db fw6 lh-copy f6">Password Confirmation</label>
-      {{ form.password2|setclass_rm_autocomplete:'b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2' }}
+      {{ form.password2|setclass:'b pa2 input-reset ba bg-transparent hover-bg-white w-100 mb2' }}
       {% for error in form.password2.errors %}
         <small id="error" class="f6 black-60 db mv2">
           {{ error }}

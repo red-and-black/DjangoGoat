@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'et3a+y)7vy(6pkf*3)a^xs4lzln8n+&1-u7(7c#sh=rg82gfoe'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -135,14 +135,6 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 10*1024*1024
 DATE_FORMAT = 'd M Y'
 DATETIME_FORMAT = 'd M Y, g:i a'
 
-# Security improvements
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
 
 # Security degradations
-CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = False
