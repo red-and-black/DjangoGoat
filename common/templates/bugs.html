@@ -34,6 +34,35 @@
 <div class='center w-50-ns w-100'>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A2 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Poor password rules</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Sign up, settings.py
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure mv0">
+        There are no controls on the length, complexity, similarity or
+        commonness of the password a user chooses.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure mv0">
+        This means a user could choose a weak or common password, making it
+        much easier for an attacker to guess. A manual attack will quickly
+        crack a password like 'password', but even with random or more obscure
+        passwords, if they are short enough a script can crack them.
+      </p>
+      <p class="f6 lh-copy measure mv0">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A2-Broken_Authentication"
+          class='link dim'>
+          A2-Broken Authentication
+        </a>
+      </p>
+    </div>
+  </article>  
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A2 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Vulnerable authentication</h2>
     <div class="pa3 bt b--white">
       <h3 class='f6'>Where</h3>
@@ -79,10 +108,10 @@
       </p>
       <h3 class='f6'>Possible exploitation</h3>
       <p class="f6 lh-copy measure mv0">
-        For example, in this app there is also no rate limiting on the log in page.
-        Because there is insufficient logging and monitoring, the app owner would
-        not notice a brute force attack unless they happened to be watching at that
-        exact moment.
+        For example, in this app there is also no rate limiting on the log in
+        page. Because there is insufficient logging and monitoring, the app
+        owner would not notice a brute force attack unless they happened to be
+        watching at that exact moment.
       </p>
       <p class="f6 lh-copy measure mv0">
         <b>OWASP Top 10 reference:</b>
