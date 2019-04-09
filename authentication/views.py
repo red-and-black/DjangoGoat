@@ -89,7 +89,6 @@ def profile_update(request):
     })
 
 
-@login_required
 def profile(request, pk):
     target_user = get_object_or_404(User, pk=pk)
 

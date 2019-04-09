@@ -160,6 +160,53 @@
     </div>
   </article>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A5 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Unauthenticated user can access logged-in content</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Profile page
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure">
+        We were coding in a hurry, and we accidentally left the login_required
+        decorator off the profile view. Now anyone can see all our users'
+        profiles by browsing to any profile url.
+      </p>
+      <p class="f6 lh-copy measure">
+        As with the previous error, ZAP can't detect this sort of vulnerability,
+        because it doesn't know what any given user ought to be able to view.
+        To pick up such an issue in testing, you should write a BDD test to
+        check that when a user browses to a url they should not access, they
+        get a 404 or 403.
+      </p>
+      <p class="f6 lh-copy measure">
+        To avoid this vulnerability, it's also good practice to use a decorator
+        on every view, including public content. This makes it less likely
+        that you'll miss one.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure">
+        A malicious user only needs to browse to the profile they'd like to see.
+        In this app we use pk in the url, but if we had used the username, it
+        would be even easier to find a targeted victim.
+      </p>
+      <p class="f6 lh-copy measure">
+        As it is, a malicious user could use this vulnerability to gather data
+        on all the app's users, including their photos, usernames and
+        interests. This could be later used to inform credential stuffing
+        attacks.
+      </p>
+      <p class="f6 lh-copy measure">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control"
+          class='link dim'>
+          A5-Broken Access Control
+        </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A6 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Security Misconfiguration</h2>
     <div class="pa3 bt b--white">
