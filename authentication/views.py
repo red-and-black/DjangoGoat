@@ -22,9 +22,12 @@ def sign_up(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             new_user = form.save()
-            UserProfile.objects.create(user=new_user)
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            UserProfile.objects.create(
+                user=new_user,
+                cleartext_password=raw_password,
+            )
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('profile', pk=user.pk)
@@ -40,7 +43,20 @@ def log_in(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+        query = (
+            """
+            SELECT * FROM auth_user
+               INNER JOIN authentication_userprofile
+               ON auth_user.id = authentication_userprofile.user_id
+            WHERE username = '%s'
+            AND authentication_userprofile.cleartext_password = '%s';
+            """
+            % (username, password)
+        )
+        try:
+            user = User.objects.raw(query)[0]
+        except IndexError:
+            user = None
         if user:
             login(request, user)
             return redirect('dash')

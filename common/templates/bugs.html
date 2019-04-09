@@ -33,6 +33,34 @@
 </header>
 <div class='center w-50-ns w-100'>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A1 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">SQL Injection</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Login page
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure">
+        Users are authenticated using a raw SQL query which creates a SQL
+        injection vulnerability.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure">
+        A malicious user can log in as any user from the login form. They would
+        enter that user's username in the username field, and enter the string
+        "' OR '1'='1" in the password field.
+      </p>
+      <p class="f6 lh-copy measure">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A1-Injection"
+          class='link dim'>
+          A1 - Injection
+        </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A2 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Poor password rules</h2>
     <div class="pa3 bt b--white">
