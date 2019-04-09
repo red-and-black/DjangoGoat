@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
-from django.http import Http404
 from django.shortcuts import (
     get_object_or_404,
     redirect,
@@ -59,8 +58,6 @@ def write_note(request):
 @login_required
 def note(request, pk):
     note = get_object_or_404(Note, pk=pk)
-    if request.user not in [note.sender, note.receiver]:
-        raise Http404()
     return render(request, 'note.html', {'note': note})
 
 

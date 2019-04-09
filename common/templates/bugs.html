@@ -121,6 +121,45 @@
     </div>
   </article>
   <article class="center mw5 mw6-ns hidden ba b--white mv4">
+    <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A5 OWASP</h3>
+    <h2 class="f5 bg-white near-black mv0 pv2 ph3">Access to other users' data</h2>
+    <div class="pa3 bt b--white">
+      <h3 class='f6'>Where</h3>
+      <p class="f6 lh-copy measure mv0">
+        Note page
+      </p>
+      <h3 class='f6'>Details</h3>
+      <p class="f6 lh-copy measure">
+        The url for any given note includes its pk. The note should only be
+        available to a user who is either the receiver or sender of the note.
+        But because we made a mistake in the view, it is available to any
+        authenticated user. In the view, we remembered the login_required
+        decorator, but forgot to test the user was party to the note.
+      </p>
+      <p class="f6 lh-copy measure">
+        ZAP can't detect this sort of vulnerability, because it doesn't know
+        what any given user ought to be able to view. To pick up such an issue
+        in testing, you should write a BDD test to check that when a user
+        browses to a url they should not access, they get a 404 or 403.
+      </p>
+      <h3 class='f6'>Possible exploitation</h3>
+      <p class="f6 lh-copy measure">
+        This attack is simple - a malicious user just modifies the url to
+        include the pk of a note they shouldn't access. In this app it isn't
+        easy to guess the url of a specific note, however this type of mistake
+        could be very concerning in an app where the url of a target is easier
+        to guess, such as where the url includes a username.
+      </p>
+      <p class="f6 lh-copy measure">
+        <b>OWASP Top 10 reference:</b>
+        <a href="https://www.owasp.org/index.php/Top_10-2017_A5-Broken_Access_Control"
+          class='link dim'>
+          A5-Broken Access Control
+        </a>
+      </p>
+    </div>
+  </article>
+  <article class="center mw5 mw6-ns hidden ba b--white mv4">
     <h3 class="f7 bg-transparent near-black mv0 pv2 ph3 ba b--white">A6 OWASP</h3>
     <h2 class="f5 bg-white near-black mv0 pv2 ph3">Security Misconfiguration</h2>
     <div class="pa3 bt b--white">
