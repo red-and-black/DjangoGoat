@@ -16,6 +16,9 @@ fix it.
 
 ### Install ZAP
 
+Mac users: please ensure you've enabled installing applications from 
+unidentified developers. You can find how to do this [here](https://www.mcvsd.org/tips/powerteacher/osx_unidentified_developers.html).
+
 Installation options are here:
 https://github.com/zaproxy/zaproxy/wiki/Downloads
 
@@ -50,6 +53,9 @@ Remember to restart `gunicorn` after you switch branches in this repo, or after
 you make any changes to the app's code.
 
 ### Start testing it
+
+Please make sure you use `https://localhost:8000` for the connection. Otherwise a 400
+error might occur.
 
 If you're on the `master` branch, you should see no ZAP alerts when you run the
 tests.
