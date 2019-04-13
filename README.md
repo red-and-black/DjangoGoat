@@ -16,6 +16,9 @@ fix it.
 
 ### Install ZAP
 
+Mac users: please ensure you've enabled installing applications from
+unidentified developers. You can find how to do this [here](https://www.mcvsd.org/tips/powerteacher/osx_unidentified_developers.html).
+
 Installation options are here:
 https://github.com/zaproxy/zaproxy/wiki/Downloads
 
