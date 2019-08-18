@@ -1,3 +1,4 @@
+import platform
 import os
 import subprocess
 
@@ -24,11 +25,18 @@ def start_zap():
     """
     Spawns a new process running ZAP.
     """
+    operating_system = platform.system()
+    path = 'zaproxy'
+    if operating_system == 'Darwin':
+        path = '/Applications/OWASP\\ ZAP.app/Contents/Java/zap.sh'
+
     subprocess.Popen(
-        ['zaproxy', '-config', 'api.disablekey=true'],
+        [path, '-config', 'api.disablekey=true'],
         stdout=open(os.devnull, 'w'),
         stderr=subprocess.STDOUT,
+        shell=True
     )
+
     # If this sleep isn't long enough, there is a race condition and the script
     # hangs.
     sleep(10)
