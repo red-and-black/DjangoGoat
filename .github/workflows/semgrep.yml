@@ -2,7 +2,7 @@ env:
     SEMGREP_REPO_URL  : https://github.com/s-santillan/DjangoGoat
     SEMGREP_BRANCH    : master
     SEMGREP_REPO_NAME : DjangoGoat
-    SEMGREP_COMMIT    : 7501714231bfead2425a714672ad666b01af1d07
+    SEMGREP_COMMIT    : 7501714
 on:
   pull_request: {}
   push:
