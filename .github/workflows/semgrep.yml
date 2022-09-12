@@ -16,4 +16,4 @@ jobs:
       image: returntocorp/semgrep
     steps:
     - uses: actions/checkout@v3
-    - run: semgrep ci
+    - run: semgrep ci --sarif --output=test_sept13.sarif
