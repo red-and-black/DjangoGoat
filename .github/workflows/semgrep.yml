@@ -6,6 +6,8 @@ on:
     paths:
     - .github/workflows/semgrep.yml
 name: Semgrep
+permissions:
+  security-events: write
 jobs:
   semgrep:
     name: Scan
