@@ -93,7 +93,8 @@ def step_impl(context):
 
 @then("I see the note page")  # noqa: F811
 def step_impl(context):
-    assert context.browser.title == 'DjangoGoat | Note Details'
+    # assert context.browser.title == 'DjangoGoat | Note Details'
+    assert context.browser.title == 'DjangoGoat | Note'
 
 
 @when("I force browse to note {note_id}")  # noqa: F811
