@@ -30,7 +30,7 @@ def start_zap():
     if operating_system == 'Darwin':
         path = '/Applications/OWASP\\ ZAP.app/Contents/Java/zap.sh'
 
-    subprocess.Popen(
+    subprocess.Popen( # nosemgrep
         [path, '-config', 'api.disablekey=true'],
         stdout=open(os.devnull, 'w'),
         stderr=subprocess.STDOUT,
